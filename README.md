@@ -13,7 +13,7 @@ Cordova 百度定位插件，兼容 W3C 的 geolocation 标准，解决中国大
 在控制台里，进入 cordova 项目目录，执行以下命令：
 
 ```bash
-$ cordova plugin add https://github.com/ETENG-OSP/cordova-plugin-baidu-geolocation.git --variable API_KEY=百度分配的AK --save
+$ cordova plugin add https://github.com/loyabe/cordova-plugin-baidu-geolocation.git --variable API_KEY=百度分配的AK --save
 ```
 
 如果需要同时在 iOS 里和 Android 里使用，请在 `config.xml` 里分别配置：
@@ -52,7 +52,20 @@ var options = {
   timeout: 27000,            // 超时时间
   coorType: 'bd09ll'         // 默认是 gcj02，可填 bd09ll 以获取百度经纬度用于访问百度 API
 }
-```
+
+var options = {
+		enableHighAccuracy: true,  // 是否使用 GPS
+		maximumAge: 30000,         // 缓存时间
+		timeout: time_interval,            // 定时时间
+		coorType: 'bd09ll' ,        // 默认是 gcj02，可填 bd09ll 以获取百度经纬度用于访问百度 API
+		distanceFilter: res.data.offset, //根据位移
+		isNative: true,//是否native 提交不需要经过js
+		postURL: REMOTE_URLS.locationUrl + '/api/system/location',
+		token:StoreService.getToken()
+
+	}
+
+
 
 succes 原型：
 ```
@@ -88,7 +101,7 @@ extra 定义：
 
 返回值：watchId
 
-### navigator.geolocation.clearWatch(watchId);
+### navigator.geolocation.clearWatch();
 清除位置追踪
 
 ## 关于坐标系
