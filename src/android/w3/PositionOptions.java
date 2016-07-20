@@ -14,6 +14,18 @@ public class PositionOptions {
   long timeout;
   String coorType;
 
+  public int getDistanceFilter() {
+    return distanceFilter;
+  }
+
+  public void setDistanceFilter(int distanceFilter) {
+    this.distanceFilter = distanceFilter;
+  }
+
+  int distanceFilter;
+
+
+
   public PositionOptions(JSONObject options) {
     try {
       this.enableHighAccuracy = options.getBoolean("enableHighAccuracy");
@@ -22,6 +34,18 @@ public class PositionOptions {
     }
     try {
       this.coorType = options.getString("coorType");
+    } catch (JSONException e) {
+      Log.v(TAG, "coorType 未定义");
+    }
+
+    try {
+      this.distanceFilter = options.getInt("distanceFilter");
+    } catch (JSONException e) {
+      Log.v(TAG, "coorType 未定义");
+    }
+
+    try {
+      this.timeout = options.getLong("timeout");
     } catch (JSONException e) {
       Log.v(TAG, "coorType 未定义");
     }

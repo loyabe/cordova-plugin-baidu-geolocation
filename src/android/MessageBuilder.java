@@ -19,6 +19,8 @@ public class MessageBuilder {
   public JSONArray build() {
     Position result = new Position()
       .setTimestamp(System.currentTimeMillis())
+      .setAddress(location.getAddrStr())
+      .setLocType(location.getLocType())
       .setCoords(new Coordinates()
         .setLatitude(location.getLatitude())
         .setLongitude(location.getLongitude())
