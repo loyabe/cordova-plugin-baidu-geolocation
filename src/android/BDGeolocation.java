@@ -37,7 +37,11 @@ public class BDGeolocation {
       locationMode = LocationMode.Hight_Accuracy;
     }
 
-    long distanceFilter =  options.getDistanceFilter();
+//    long timeout = options.getTimeout();
+//    if (timeout == 0){
+//      timeout = 60*1000;
+//    }
+    int distanceFilter =  options.getDistanceFilter();
 
     if (distanceFilter <= 0){
       distanceFilter = 100;
@@ -45,6 +49,7 @@ public class BDGeolocation {
 
     LocationClientOption bdoptions = new LocationClientOption();
     bdoptions.setLocationMode(locationMode);//可选，默认高精度，设置定位模式，高精度，低功耗，仅设备
+    bdoptions.setOpenGps(true);
     bdoptions.setCoorType(coorType);//可选，默认gcj02，设置返回的定位结果坐标系，如果配合百度地图使用，建议设置为bd09ll;
     bdoptions.setScanSpan(3000);//可选，默认0，即仅定位一次，设置发起定位请求的间隔需要大于等于1000ms才是有效的
     bdoptions.setIsNeedAddress(true);//可选，设置是否需要地址信息，默认不需要
@@ -55,7 +60,7 @@ public class BDGeolocation {
     bdoptions.setIsNeedLocationDescribe(true);//可选，默认false，设置是否需要位置语义化结果，可以在BDLocation.getLocationDescribe里得到，结果类似于“在北京天安门附近”
     bdoptions.setIsNeedLocationPoiList(true);//可选，默认false，设置是否需要POI结果，可以在BDLocation.getPoiList里得到
     bdoptions.SetIgnoreCacheException(false);//可选，默认false，设置是否收集CRASH信息，默认收集
-//    bdoptions.setOpenAutoNotifyMode(10000 ,  (int)distanceFilter, LocationClientOption.LOC_SENSITIVITY_HIGHT);
+    bdoptions.setOpenAutoNotifyMode(10000 ,  distanceFilter, LocationClientOption.LOC_SENSITIVITY_HIGHT);
     client.setLocOption(bdoptions);
   }
 
